@@ -11,4 +11,4 @@ writer = File.open(ARGV[1], "w")
 writer.write(translated_text)
 writer.close
 
-puts "Created '#{ARGV[1]}' containing #{translated_text.length - 2} characters."
+puts "Created '#{ARGV[1]}' containing #{translated_text.delete("\n").length} characters."
