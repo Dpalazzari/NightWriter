@@ -30,7 +30,7 @@ class NightRead
   end
 
   def remove_line_break
-    @new_input = input.split("\n")
+    @new_input = @input.split("\n")
     index_input_1 = @new_input[0]
     index_input_2 = @new_input[1]
     index_input_3 = @new_input[2]

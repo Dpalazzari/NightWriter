@@ -5,10 +5,10 @@ incoming_text = handle.read
 handle.close
 
 nightread = NightRead.new(incoming_text)
-variable_to_be_named = nightread.method_name
+english = nightread.remove_line_break
 
 writer = File.open(ARGV[1], "w")
-writer.write(variable_to_be_named)
+writer.write(english)
 writer.close
 
-puts "Created '#{ARGV[1]}' containing #{variable_to_be_named} characters."
+puts "Created '#{ARGV[1]}' containing #{english.length} characters."
