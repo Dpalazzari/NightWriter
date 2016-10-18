@@ -5,10 +5,10 @@ incoming_text = handle.read
 handle.close
 
 nightwrite = NightWrite.new(incoming_text)
-translated_text = nightwrite.translate_to_braille
+braille = nightwrite.translate_to_braille
 
 writer = File.open(ARGV[1], "w")
-writer.write(translated_text)
+writer.write(braille)
 writer.close
 
-puts "Created '#{ARGV[1]}' containing #{translated_text.delete("\n").length} characters."
+puts "Created '#{ARGV[1]}' containing #{braille.delete("\n").length} characters."
