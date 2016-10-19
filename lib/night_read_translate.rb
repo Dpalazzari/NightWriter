@@ -32,8 +32,7 @@ class NightRead
     while translated.length > 0
       current_letter = translated.shift
       if current_letter == "^"
-        current_letter = translated.shift
-        current_letter = current_letter.capitalize
+        current_letter = translated.shift.capitalize
       elsif current_letter == "#"
         current_letter = translated.shift
         current_letter = @switch_characters[current_letter]
