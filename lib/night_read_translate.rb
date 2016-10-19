@@ -1,4 +1,5 @@
 require '../lib/alphabet.rb'
+require 'pry'
 
 class NightRead
 
@@ -12,7 +13,7 @@ class NightRead
     @inverse_library = @library.invert
   end
 
-  def remove_line_break
+  def translate_to_english
     @new_input = @input.split("\n")
     index_input_1 = @new_input[0]
     index_input_2 = @new_input[1]
@@ -23,14 +24,21 @@ class NightRead
     letter_3 = index_input_3.scan(/../)
 
     letters = letter_1.zip(letter_2, letter_3)
-
     translated = letters.map do |letter|
       @inverse_library[letter]
     end
-    final_phrase = translated.join
+    final_phrase = []
+    while translated.length > 0
+      current_letter = translated.shift
+      if current_letter == "^"
+        current_letter = translated.shift
+        current_letter = current_letter.capitalize
+      end
+      final_phrase << current_letter
+    end
+    final_phrase.join
   end
-
 end
 
-# test = NightRead.new("000.00\n.0.000\n..0...")
-# test.remove_line_break
+# test = NightRead.new("...0\n..0.\n.0..")
+# test.translate_to_english

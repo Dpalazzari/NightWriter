@@ -5,7 +5,7 @@ incoming_text = handle.read
 handle.close
 
 nightread = NightRead.new(incoming_text)
-english = nightread.remove_line_break
+english = nightread.translate_to_english
 
 writer = File.open(ARGV[1], "w")
 writer.write(english)
