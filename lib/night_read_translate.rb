@@ -4,30 +4,35 @@ require 'pry'
 class NightRead
 
   attr_reader :input,
-              :library,
-              :switch_characters
+              :library
 
   def initialize(input)
     @input = input
-    codex = Characters.new
-    @library = codex.letters
-    @switch_characters = codex.switch_characters
+    @library = Characters.new
+
   end
 
-  def translate_to_english
-    new_input = @input.split("\n")
-    letter_1 = new_input[0].scan(/../)
-    letter_2 = new_input[1].scan(/../)
-    letter_3 = new_input[2].scan(/../)
+  def split_braille
+    braille_chars = input.split("\n")
+    creating_braille_groups(braille_chars)
+  end
 
+  def creating_braille_groups(braille_chars)
+    letter_1 = braille_chars[0].scan(/../)
+    letter_2 = braille_chars[1].scan(/../)
+    letter_3 = braille_chars[2].scan(/../)
     letters = letter_1.zip(letter_2, letter_3)
-    translated = letters.map do |letter|
-      @library[letter]
-    end
-    carrots_and_pounds(translated)
+    decipher_english_chars(letters)
   end
 
-  def carrots_and_pounds(translated)
+  def decipher_english_chars(letters)
+    translated = letters.map do |letter|
+      library.letters[letter]
+    end
+    find_caps_and_nums(translated)
+  end
+
+  def find_caps_and_nums(translated)
     final_phrase = []
     while translated.length > 0
       current_letter = translated.shift
@@ -35,7 +40,7 @@ class NightRead
         current_letter = translated.shift.capitalize
       elsif current_letter == "#"
         current_letter = translated.shift
-        current_letter = @switch_characters[current_letter]
+        current_letter = library.switch_characters[current_letter]
       end
       final_phrase << current_letter
     end
