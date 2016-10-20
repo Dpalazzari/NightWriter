@@ -1,5 +1,4 @@
 require '../lib/characters.rb'
-require 'pry'
 
 class NightRead
 

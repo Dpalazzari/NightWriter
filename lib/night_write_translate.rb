@@ -1,5 +1,4 @@
 require '../lib/writer_alphabet.rb'
-require 'pry'
 
 class NightWrite
 
@@ -12,7 +11,7 @@ class NightWrite
   end
 
   def translate_to_braille
-    single_letters = input.chars.map do |letter|
+    single_letters = input.chomp.chars.map do |letter|
       @library[letter]
     end
     braille = transposing(single_letters)
@@ -32,7 +31,3 @@ class NightWrite
     translated = "#{row_1}\n#{row_2}\n#{row_3}"
   end
 end
-
-
-# translate = NightWrite.new("turtle")
-# translate.translate_to_braille
